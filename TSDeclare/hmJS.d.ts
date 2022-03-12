@@ -82,7 +82,7 @@ declare namespace hm {
         /**
          * ステートメントの実行
          */
-        function Statement(funcname: string, ...optionalParams: any[]): void;
+        function Statement(funcname: string, ...optionalParams: any[]): IStatementResult;
 
         interface IFunctionResult {
             Result :number | string;
@@ -93,7 +93,7 @@ declare namespace hm {
         /**
          * 関数の実行
          */
-         function Function(funcname: string, ...optionalParams: any[]): void;
+         function Function(funcname: string, ...optionalParams: any[]): IFunctionResult;
     }
  
     namespace Edit {
