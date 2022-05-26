@@ -74,6 +74,7 @@
     <Compile Include="hmJSStaticLib\hmJSHidemaruMacro.cs" />
     <Compile Include="hmJSStaticLib\hmJSHidemaruOutputPane.cs" />
     <Compile Include="hmJSStaticLib\hmJSStaticLib.cs" />
+    <Compile Include="hmJSStaticLib\HmOriginalDecodeFunc.cs" />
     <Compile Include="hmJSStaticLib\HmOriginalEncodeFunc.cs" />
     <Compile Include="hmJSStaticLib\HmOriginalEncodeMap.cs" />
     <Compile Include="hmJSStaticLib\HmWndHandleSearcher.cs" />
