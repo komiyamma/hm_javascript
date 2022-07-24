@@ -257,7 +257,7 @@ public sealed partial class hmJSDynamicLib
                                 List<string> string_list = new List<string>();
 
                                 int list_count = 0;
-                                for (int i=0; i<len; i++)
+                                for (int i = 0; i < len; i++)
                                 {
                                     Object dv = test_dynamic_value[i];
                                     list_count++;
