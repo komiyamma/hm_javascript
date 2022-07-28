@@ -19,8 +19,6 @@ public:
 
 	static void SetCodePage(IntPtr cp);
 
-	static void SetCompatibleJSMode(IntPtr mode);
-
 	static IntPtr SetTmpVar(Object^ value);
 
 	static Object^ PopTmpVar();
