@@ -35,6 +35,11 @@ public class IJSStaticLib
         hmJSDynamicLib.SetCodePage(cp);
     }
 
+    public static void SetCompatibleJSMode(IntPtr mode)
+    {
+        hmJSDynamicLib.SetCompatibleJSMode(mode);
+    }
+
     public static IntPtr SetTmpVar(Object value)
     {
         return hmJSDynamicLib.SetTmpVar(value);
@@ -231,6 +236,11 @@ public sealed partial class hmJSDynamicLib
                 ";
                 engine.Execute(expression);
 
+                /*
+                var hidemaru_macrojs = hidemacJsGlobal.GetHidemacJsGlobalText();
+                engine.Execute(hidemaru_macrojs);
+                */
+
                 dpr = new DllPathResolver();
 
                 return (IntPtr)1;
@@ -250,6 +260,12 @@ public sealed partial class hmJSDynamicLib
     public static void SetCodePage(IntPtr cp)
     {
         codepage = cp.ToInt32();
+    }
+
+    static int jsmode_compat = 0;
+    public static void SetCompatibleJSMode(IntPtr mode)
+    {
+        jsmode_compat = mode.ToInt32();
     }
 
     public static IntPtr GetNumVar(String mng_var_name)
@@ -660,6 +676,7 @@ public sealed partial class hmJSDynamicLib
         }
 
         SetCodePage((IntPtr)default_codepage);
+        SetCompatibleJSMode(IntPtr.Zero);
         iDllBindHandle = 0;
         tmpVar = null;
 

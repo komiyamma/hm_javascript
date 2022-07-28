@@ -31,9 +31,17 @@ static bool BindDllHandle() {
 
 
 MACRO_DLL intHM_t SetCodePage(intHM_t cp) {
+	BindDllHandle();
 	IJSStaticLib::SetCodePage((IntPtr)cp);
 	return TRUE;
 }
+
+MACRO_DLL intHM_t SetCompatibleJSMode(intHM_t mode) {
+	BindDllHandle();
+	IJSStaticLib::SetCompatibleJSMode((IntPtr)mode);
+	return TRUE;
+}
+
 
 // GŠÛ‚Ì•Ï”‚ª•¶š—ñ‚©”’l‚©‚Ì”»’è—p
 MACRO_DLL intHM_t SetTmpVar(const void* dynamic_value) {

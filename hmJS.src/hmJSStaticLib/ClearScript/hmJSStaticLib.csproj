@@ -63,6 +63,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="HidemacJsGlobal\hidemacJsGlobal.cs" />
     <Compile Include="hmJSStaticLib\hmJSHidemaruExplorerPane.cs" />
     <Compile Include="hmJSStaticLib\hmJSHidemaruFile.cs" />
     <Compile Include="hmJSStaticLib\ClearScriptExtension.cs" />
