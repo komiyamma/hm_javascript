@@ -225,9 +225,25 @@ public sealed partial class hmJSDynamicLib
 
                 // ヒアドキュメント用の関数 R(text)
                 String expression = @"
-                function R(text){
-                    return text.toString().match(/\/\*([\s\S]*)\*\//)[1].toString();
-                }
+function R(text){
+    return text.toString().match(/\/\*([\s\S]*)\*\//)[1].toString();
+}
+
+function require(filepath) {
+    var m_file_path = """";
+    var m_currentmacrodirectory = hm.Macro.Var(""currentmacrodirectory"");
+    if (clr.System.IO.File.Exists(m_currentmacrodirectory + ""\\"" + filepath + "".js"")) {
+        m_file_path = m_currentmacrodirectory + ""\\"" + filepath + "".js"";
+    } else if (clr.System.IO.File.Exists(filepath + "".js"")) {
+        m_file_path = filepath + "".js"";
+    }
+
+    var module_code = clr.System.IO.File.ReadAllText(m_file_path);
+    var eval_code = ""(function(){ var exports = {};"" +
+        module_code + "";"" +
+        ""return exports; })()"";
+    return eval(eval_code);
+}                
                 ";
                 engine.Execute(expression);
 
