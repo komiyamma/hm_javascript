@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using Microsoft.ClearScript;
 
 
 
@@ -75,6 +76,99 @@ public sealed partial class hmJSDynamicLib
             }
         }
 
+        public static object require(string filepath)
+        {
+            var m_file_path = "";
+            var m_currentmacrodirectory = (string)Hidemaru.Macro.Var("currentmacrodirectory");
+            if (filepath.ToLower().EndsWith(".json"))
+            {
+                if (System.IO.File.Exists(m_currentmacrodirectory + "\\" + filepath))
+                {
+                    m_file_path = m_currentmacrodirectory + "\\" + filepath;
+                }
+                if (System.IO.File.Exists(filepath))
+                {
+                    m_file_path = filepath;
+                }
+
+                if (m_file_path == "") {
+                    var err = new System.IO.FileNotFoundException("HidemaruMacroRequireFileNotFoundException: \n" + filepath);
+                    OutputDebugStream("HidemaruMacroRequireFileNotFoundException: \n" + filepath);
+                    return err;
+                }
+
+                var json_data = System.IO.File.ReadAllText(m_file_path);
+                return engine.Script.JSON.parse(json_data);
+            }
+
+            if (System.IO.File.Exists(m_currentmacrodirectory + "\\" + filepath + ".js"))
+            {
+                m_file_path = m_currentmacrodirectory + "\\" + filepath + ".js";
+            }
+            else if (System.IO.File.Exists(filepath + ".js"))
+            {
+                m_file_path = filepath + ".js";
+            }
+
+            if (m_file_path == "")
+            {
+                var err = new System.IO.FileNotFoundException("HidemaruMacroRequireFileNotFoundException: \n" + filepath + ".js");
+                OutputDebugStream("HidemaruMacroRequireFileNotFoundException: \n" + filepath + ".js");
+                return err;
+            }
+
+            var module_code = System.IO.File.ReadAllText(m_file_path);
+            var expression = "(function(){ var exports = { }; " +
+            module_code + "; " + "return exports; })()";
+
+            Object eval_obj = null;
+
+            try
+            {
+                // 文字列からソース生成
+                eval_obj = engine.Evaluate(expression);
+            }
+            catch (ScriptEngineException e)
+            {
+                OutputDebugStream("in " + m_file_path);
+                OutputDebugStream(e.GetType().Name + ":");
+                OutputDebugStream(e.ErrorDetails);
+
+                var stack = engine.GetStackTrace();
+                OutputDebugStream(stack.ToString());
+
+                ScriptEngineException next = e.InnerException as ScriptEngineException;
+                while (next != null)
+                {
+                    OutputDebugStream(next.ErrorDetails);
+                    next = next.InnerException as ScriptEngineException;
+                }
+            }
+            catch (ScriptInterruptedException e)
+            {
+                OutputDebugStream("in " + m_file_path);
+                OutputDebugStream(e.GetType().Name + ":");
+                OutputDebugStream(e.ErrorDetails);
+
+                var stack = engine.GetStackTrace();
+                OutputDebugStream(stack.ToString());
+
+                ScriptInterruptedException next = e.InnerException as ScriptInterruptedException;
+                while (next != null)
+                {
+                    OutputDebugStream(next.ErrorDetails);
+                    next = next.InnerException as ScriptInterruptedException;
+                }
+            }
+            catch (Exception e)
+            {
+                OutputDebugStream("in " + m_file_path);
+                OutputDebugStream(e.GetType().Name + ":");
+                OutputDebugStream(e.Message);
+            }
+
+            return eval_obj;
+        }
 
         // debuginfo関数
         public static void debuginfo(params Object[] expressions)

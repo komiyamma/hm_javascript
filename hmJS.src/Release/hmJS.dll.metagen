@@ -497,6 +497,7 @@ Class hmJSDynamicLib+Hidemaru: AutoLayout, AnsiClass, Class, NestedPublic, Seale
     Double version 'get ' : 
   Methods:
     get_WindowHandle(): PrivateScope, Public, Static, HideBySig, SpecialName
+    require(String): PrivateScope, Public, Static, HideBySig
     debuginfo(Object[]): PrivateScope, Public, Static, HideBySig
     get_version(): PrivateScope, Public, Static, HideBySig, SpecialName
 Class hmJSDynamicLib+hmJSConsole: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
