@@ -230,14 +230,34 @@ function R(text){
 }
 
 function require(filepath) {
+
     var m_file_path = """";
     var m_currentmacrodirectory = hm.Macro.Var(""currentmacrodirectory"");
+    if ( filepath.toLowerCase().match(/\.json$/) ) {
+        if (clr.System.IO.File.Exists(m_currentmacrodirectory + ""\\"" + filepath)) {
+            m_file_path = m_currentmacrodirectory + ""\\"" + filepath;
+        }
+        if (clr.System.IO.File.Exists(filepath)) {
+            m_file_path = filepath
+        }
+
+        if (m_file_path == """") {
+            return new Error(""MODULE_NOT_FOUND: "" + filepath );
+        }
+
+        var json_data = clr.System.IO.File.ReadAllText(m_file_path);
+        return JSON.parse(json_data);
+    }
+
     if (clr.System.IO.File.Exists(m_currentmacrodirectory + ""\\"" + filepath + "".js"")) {
         m_file_path = m_currentmacrodirectory + ""\\"" + filepath + "".js"";
     } else if (clr.System.IO.File.Exists(filepath + "".js"")) {
         m_file_path = filepath + "".js"";
     }
 
+    if (m_file_path == """") {
+        return new Error(""MODULE_NOT_FOUND: "" + filepath );
+    }
     var module_code = clr.System.IO.File.ReadAllText(m_file_path);
     var eval_code = ""(function(){ var exports = {};"" +
         module_code + "";"" +
