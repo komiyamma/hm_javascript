@@ -91,7 +91,8 @@ public sealed partial class hmJSDynamicLib
                     m_file_path = filepath;
                 }
 
-                if (m_file_path == "") {
+                if (m_file_path == "")
+                {
                     var err = new System.IO.FileNotFoundException("HidemaruMacroRequireFileNotFoundException: \n" + filepath);
                     OutputDebugStream("HidemaruMacroRequireFileNotFoundException: \n" + filepath);
                     return err;
@@ -105,16 +106,33 @@ public sealed partial class hmJSDynamicLib
             {
                 m_file_path = m_currentmacrodirectory + "\\" + filepath + ".js";
             }
+            else if (System.IO.File.Exists(m_currentmacrodirectory + "\\" + filepath))
+            {
+                m_file_path = m_currentmacrodirectory + "\\" + filepath;
+            }
             else if (System.IO.File.Exists(filepath + ".js"))
             {
                 m_file_path = filepath + ".js";
             }
+            else if (System.IO.File.Exists(filepath))
+            {
+                m_file_path = filepath;
+            }
 
             if (m_file_path == "")
             {
-                var err = new System.IO.FileNotFoundException("HidemaruMacroRequireFileNotFoundException: \n" + filepath + ".js");
-                OutputDebugStream("HidemaruMacroRequireFileNotFoundException: \n" + filepath + ".js");
-                return err;
+                if (filepath.ToLower().EndsWith(".js"))
+                {
+                    var err = new System.IO.FileNotFoundException("HidemaruMacroRequireFileNotFoundException: \n" + filepath);
+                    OutputDebugStream("HidemaruMacroRequireFileNotFoundException: \n" + filepath);
+                    return err;
+                }
+                else
+                {
+                    var err = new System.IO.FileNotFoundException("HidemaruMacroRequireFileNotFoundException: \n" + filepath + ".js");
+                    OutputDebugStream("HidemaruMacroRequireFileNotFoundException: \n" + filepath + ".js");
+                    return err;
+                }
             }
 
             var module_code = System.IO.File.ReadAllText(m_file_path);
@@ -184,7 +202,7 @@ public sealed partial class hmJSDynamicLib
                         isClearScriptItem = true;
                     }
                 }
-                catch (Exception )
+                catch (Exception)
                 {
 
                 }
