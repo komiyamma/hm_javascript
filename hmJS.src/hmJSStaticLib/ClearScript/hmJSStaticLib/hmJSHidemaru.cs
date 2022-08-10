@@ -136,8 +136,10 @@ public sealed partial class hmJSDynamicLib
             }
 
             var module_code = System.IO.File.ReadAllText(m_file_path);
-            var expression = "(function(){ var exports = { }; " +
-            module_code + "; " + "return exports; })()";
+            // exportsが空 =(Object.keys(exports).length == 0 || exports.constructor == Object) でないなら、
+            // exportsを返す。それ以外は、module.exportsを返す。
+            var expression = "(function(){ var module = { exports: {} }; var exports = module.exports; " +
+            module_code + "; " + "\nreturn module.exports; })()";
 
             Object eval_obj = null;
 
