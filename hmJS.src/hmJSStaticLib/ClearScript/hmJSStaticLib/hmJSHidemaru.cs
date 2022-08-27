@@ -88,7 +88,9 @@ public sealed partial class hmJSDynamicLib
                 }
                 if (System.IO.File.Exists(filepath))
                 {
-                    m_file_path = filepath;
+                    if (filepath.Contains(@"\") || filepath.Contains(@"/")) { 
+                        m_file_path = filepath;
+                    }
                 }
 
                 if (m_file_path == "")
@@ -112,11 +114,17 @@ public sealed partial class hmJSDynamicLib
             }
             else if (System.IO.File.Exists(filepath + ".js"))
             {
-                m_file_path = filepath + ".js";
+                if (filepath.Contains(@"\") || filepath.Contains(@"/"))
+                {
+                    m_file_path = filepath + ".js";
+                }
             }
             else if (System.IO.File.Exists(filepath))
             {
-                m_file_path = filepath;
+                if (filepath.Contains(@"\") || filepath.Contains(@"/"))
+                {
+                    m_file_path = filepath;
+                }
             }
 
             if (m_file_path == "")
