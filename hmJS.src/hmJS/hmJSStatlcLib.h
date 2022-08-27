@@ -17,6 +17,8 @@ public:
 
 	static IntPtr BindDllHandle(IntPtr dll);
 
+	static void SetJSModeExpression(String^ str);
+
 	static void SetCodePage(IntPtr cp);
 
 	static IntPtr SetTmpVar(Object^ value);

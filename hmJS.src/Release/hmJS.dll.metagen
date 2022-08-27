@@ -17,6 +17,7 @@ Class IJSStaticLib: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     OutputDebugStream(String): PrivateScope, Public, Static, HideBySig
     CreateScope(): PrivateScope, Public, Static, HideBySig
     BindDllHandle(IntPtr): PrivateScope, Public, Static, HideBySig
+    SetJSModeExpression(String): PrivateScope, Public, Static, HideBySig
     SetCodePage(IntPtr): PrivateScope, Public, Static, HideBySig
     SetTmpVar(Object): PrivateScope, Public, Static, HideBySig
     PopTmpVar(): PrivateScope, Public, Static, HideBySig
@@ -48,6 +49,7 @@ Class hmJSDynamicLib: AutoLayout, AnsiClass, Class, Public, Sealed
     SendMessage(IntPtr, UInt32, Int32, IntPtr): PrivateScope, Public, Static, HideBySig, PinvokeImpl
     OutputDebugStream(String): PrivateScope, Public, Static, HideBySig
     BindDllHandle(IntPtr): PrivateScope, Public, Static, HideBySig
+    SetJSModeExpression(String): PrivateScope, Public, Static, HideBySig
     ModifyFuncCallByDllType(String): PrivateScope, Public, Static, HideBySig
     SetTmpVar(Object): PrivateScope, Public, Static, HideBySig
     PopTmpVar(): PrivateScope, Public, Static, HideBySig

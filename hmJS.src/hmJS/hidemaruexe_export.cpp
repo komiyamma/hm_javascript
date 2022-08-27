@@ -5,10 +5,9 @@
 
 #include <windows.h>
 #include "hidemaruexe_export.h"
-
+#include <string>
 
 PFNGetDllFuncCalledType Hidemaru_GetDllFuncCalledType = NULL;
-
 struct CHidemaruExeExporter {
 	CHidemaruExeExporter() {
 		// èGä€ 8.66à»è„

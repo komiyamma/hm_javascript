@@ -16,6 +16,8 @@ using namespace std;
 using namespace System;
 
 
+extern HMODULE hSelfDllModule;
+
 // 上の手動のBindDllHandleを自動で行う。秀丸8.66以上
 // １回だけ実行すれば良いわけではない。dllが読み込まれている間にもdll値が変わってしまうかもしれないため。(将来の実装では)
 // よって、DoStringとDoFileの時を契機に更新する。
@@ -29,9 +31,26 @@ static bool BindDllHandle() {
 	return false;
 }
 
+bool isExpressionLoaded = false;
+static bool InitializeHandle() {
+	bool ret = BindDllHandle();
+	if (!isExpressionLoaded && hSelfDllModule) {
+		HRSRC res = FindResource(hSelfDllModule, TEXT("HMJSMODE"), TEXT("TEXT"));
+		if (res) {
+			char *expression = (char *)LoadResource(hSelfDllModule, res);
+			if (expression) {
+				String^ mng_expression = gcnew String(expression);
+				IJSStaticLib::SetJSModeExpression(mng_expression);
+				isExpressionLoaded = true;
+			}
+		}
+	}
+	return ret;
+}
+
 
 MACRO_DLL intHM_t SetCodePage(intHM_t cp) {
-	BindDllHandle();
+	InitializeHandle();
 	IJSStaticLib::SetCodePage((IntPtr)cp);
 	return TRUE;
 }
@@ -61,13 +80,13 @@ MACRO_DLL const TCHAR * PopStrVar() {
 
 //------------------------------------------------------------------------------------
 MACRO_DLL intHM_t GetNumVar(const TCHAR *sz_var_name) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::GetNumVar(gcnew String(sz_var_name));
 }
 
 MACRO_DLL intHM_t SetNumVar(const TCHAR *sz_var_name, intHM_t value) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::SetNumVar(gcnew String(sz_var_name), (IntPtr)value);
 }
@@ -75,7 +94,7 @@ MACRO_DLL intHM_t SetNumVar(const TCHAR *sz_var_name, intHM_t value) {
 // 秀丸のキャッシュのため
 static wstring strvars;
 MACRO_DLL const TCHAR * GetStrVar(const TCHAR *sz_var_name) {
-	BindDllHandle();
+	InitializeHandle();
 
 	auto var = IJSStaticLib::GetStrVar(gcnew String(sz_var_name));
 	strvars = String_to_tstring(var->ToString());
@@ -83,7 +102,7 @@ MACRO_DLL const TCHAR * GetStrVar(const TCHAR *sz_var_name) {
 }
 
 MACRO_DLL intHM_t SetStrVar(const TCHAR *sz_var_name, const TCHAR *value) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::SetStrVar(gcnew String(sz_var_name), gcnew String(value));
 }
@@ -91,13 +110,13 @@ MACRO_DLL intHM_t SetStrVar(const TCHAR *sz_var_name, const TCHAR *value) {
 
 //------------------------------------------------------------------------------------
 MACRO_DLL intHM_t GetNumItemOfList(const TCHAR *sz_arr_name, const intHM_t index) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::GetNumItemOfList(gcnew String(sz_arr_name), (IntPtr)index);
 }
 
 MACRO_DLL intHM_t SetNumItemOfList(const TCHAR *sz_arr_name, const intHM_t index, const intHM_t value) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::SetNumItemOfList(gcnew String(sz_arr_name), (IntPtr)index, (IntPtr)value);
 }
@@ -105,7 +124,7 @@ MACRO_DLL intHM_t SetNumItemOfList(const TCHAR *sz_arr_name, const intHM_t index
 // 秀丸のキャッシュのため
 static wstring strvarsoflist;
 MACRO_DLL const TCHAR * GetStrItemOfList(const TCHAR *sz_arr_name, const intHM_t index) {
-	BindDllHandle();
+	InitializeHandle();
 
 	auto var = IJSStaticLib::GetStrItemOfList(gcnew String(sz_arr_name), (IntPtr)index);
 	strvarsoflist = String_to_tstring(var->ToString());
@@ -113,7 +132,7 @@ MACRO_DLL const TCHAR * GetStrItemOfList(const TCHAR *sz_arr_name, const intHM_t
 }
 
 MACRO_DLL intHM_t SetStrItemOfList(const TCHAR *sz_arr_name, const intHM_t index, const TCHAR *value) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::SetStrItemOfList(gcnew String(sz_arr_name), (IntPtr)index, gcnew String(value));
 }
@@ -123,13 +142,13 @@ MACRO_DLL intHM_t SetStrItemOfList(const TCHAR *sz_arr_name, const intHM_t index
 
 //------------------------------------------------------------------------------------
 MACRO_DLL intHM_t GetNumItemOfDict(const TCHAR *sz_arr_name, const TCHAR *key) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::GetNumItemOfDict(gcnew String(sz_arr_name), gcnew String(key));
 }
 
 MACRO_DLL intHM_t SetNumItemOfDict(const TCHAR *sz_arr_name, const TCHAR *key, const intHM_t value) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::SetNumItemOfDict(gcnew String(sz_arr_name), gcnew String(key), (IntPtr)value);
 }
@@ -138,7 +157,7 @@ MACRO_DLL intHM_t SetNumItemOfDict(const TCHAR *sz_arr_name, const TCHAR *key, c
 
 static wstring strvarsofdict;
 MACRO_DLL const TCHAR * GetStrItemOfDict(const TCHAR *sz_arr_name, const TCHAR *key) {
-	BindDllHandle();
+	InitializeHandle();
 
 	auto var = IJSStaticLib::GetStrItemOfDict(gcnew String(sz_arr_name), gcnew String(key));
 	strvarsofdict = String_to_tstring(var->ToString());
@@ -146,7 +165,7 @@ MACRO_DLL const TCHAR * GetStrItemOfDict(const TCHAR *sz_arr_name, const TCHAR *
 }
 
 MACRO_DLL intHM_t SetStrItemOfDict(const TCHAR *sz_arr_name, const TCHAR *key, const TCHAR *value) {
-	BindDllHandle();
+	InitializeHandle();
 
 	return (intHM_t)IJSStaticLib::SetStrItemOfDict(gcnew String(sz_arr_name), gcnew String(key), gcnew String(value));
 }
@@ -154,7 +173,7 @@ MACRO_DLL intHM_t SetStrItemOfDict(const TCHAR *sz_arr_name, const TCHAR *key, c
 
 
 MACRO_DLL intHM_t DoString(const TCHAR *szexpression) {
-	BindDllHandle();
+	InitializeHandle();
 
 	// ここはよく間違えるのでここだけチェック。他は秀丸8.66以降ではほとんど利用しないので無視
 	if (Hidemaru_GetDllFuncCalledType) {
@@ -173,7 +192,7 @@ MACRO_DLL intHM_t DoString(const TCHAR *szexpression) {
 }
 
 MACRO_DLL intHM_t DoFile(const TCHAR *szfilename) {
-	BindDllHandle();
+	InitializeHandle();
 
 	// ここはよく間違えるのでここだけチェック。他は秀丸8.66以降ではほとんど利用しないので無視
 	if (Hidemaru_GetDllFuncCalledType) {
@@ -192,6 +211,7 @@ MACRO_DLL intHM_t DoFile(const TCHAR *szfilename) {
 }
 
 MACRO_DLL intHM_t DestroyScope() {
+	isExpressionLoaded = false;
 	return (intHM_t)IJSStaticLib::DestroyScope();
 }
 

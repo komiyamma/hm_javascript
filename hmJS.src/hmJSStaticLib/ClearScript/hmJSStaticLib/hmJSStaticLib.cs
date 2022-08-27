@@ -30,6 +30,11 @@ public class IJSStaticLib
         return hmJSDynamicLib.BindDllHandle(dll);
     }
 
+    public static void SetJSModeExpression(String str)
+    {
+        hmJSDynamicLib.SetJSModeExpression(str);
+    }
+
     public static void SetCodePage(IntPtr cp)
     {
         hmJSDynamicLib.SetCodePage(cp);
@@ -175,6 +180,13 @@ public sealed partial class hmJSDynamicLib
     {
         iDllBindHandle = dll.ToInt32();
         return dll;
+    }
+
+    static bool isJSModeLoaded = false;
+    static string strJSModeExpression = "";
+    public static void SetJSModeExpression(String str)
+    {
+        strJSModeExpression = str;
     }
 
     // dllのloaddllタイプによって、渡されたcmd(=expression)に対して、「dllの番号,」or「」を当てはめる処理
@@ -565,6 +577,8 @@ function R(text){
         return (IntPtr)0;
     }
 
+    
+
     public static IntPtr DoString(String expression, String inAction = "DoString")
     {
         if (CreateScope() == (IntPtr)0)
@@ -573,6 +587,12 @@ function R(text){
         }
         try
         {
+            if (!isJSModeLoaded)
+            {
+                isJSModeLoaded = true;
+                engine.Evaluate(strJSModeExpression);
+            }
+
             // 文字列からソース生成
             engine.Evaluate(expression);
             return (IntPtr)1;
@@ -663,6 +683,7 @@ function R(text){
 
         SetCodePage((IntPtr)default_codepage);
         iDllBindHandle = 0;
+        isJSModeLoaded = false;
         tmpVar = null;
 
         dpr = null;
