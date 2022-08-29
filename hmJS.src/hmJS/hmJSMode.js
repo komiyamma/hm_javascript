@@ -809,14 +809,17 @@
  hc.dllfuncstr = function(){var m="dllfuncstr";eval(fs);return r;}
  hc.dllfuncstrw = function(){var m="dllfuncstrw";eval(fs);return r;}
  hc.loaddllfile = function(){var m="loaddllfile";eval(fs);return r;}
+ hc.getloaddllfile = function(){var m="getloaddllfile";eval(fs);return r;}
  hc.setdlldetachfunc = function(){var m="setdlldetachfunc";eval(st);return r;}
  hc.dllfuncexist = function(){var m="dllfuncexist";eval(fn);return r;}
  hc.keepdll = function(){var m="keepdll";eval(st);return r;}
 
  hc.createobject = function(){var m="createobject";eval(fn); return r;}
  hc.releaseobject = function(){var m="releaseobject";eval(fn); return r;}
- hc.member_rnum = function(){var m="member";eval(fn); return r;}
- hc.member_rstr = function(){var m="member";eval(fs); return r;}
+ hc.member = {
+    rnum:function(){var m="member";eval(fn); return r;},
+    rstr:function(){var m="member";eval(fs); return r;}
+ };
  hc.setcomdetachmethod = function(){var m="setcomdetachmethod";eval(st); return r;}
  hc.keepobject = function(){var m="keepobject";eval(st); return r;}
  }
