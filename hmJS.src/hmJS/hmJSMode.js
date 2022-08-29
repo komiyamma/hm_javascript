@@ -347,12 +347,6 @@
  hg.OPENFILEPART = function(){var m="OPENFILEPART";eval(st);return r;};if(f)OPENFILEPART=hg.OPENFILEPART;
  hg.deletefile = function(){var m="deletefile";eval(st);return r;};if(f)deletefile=hg.deletefile;
  hg.propertydialog = function(){var m="propertydialog";eval(st);return r;};if(f)propertydialog=hg.propertydialog;
- hg.exit = function(){var m="exit";eval(st);return r;};if(f)exit=hg.exit;
- hg.exitall = function(){var m="exitall";eval(st);return r;};if(f)exitall=hg.exitall;
- hg.saveexit = function(){var m="saveexit";eval(st);return r;};if(f)saveexit=hg.saveexit;
- hg.saveexitall = function(){var m="saveexitall";eval(st);return r;};if(f)saveexitall=hg.saveexitall;
- hg.quit = function(){var m="quit";eval(st);return r;};if(f)quit=hg.quit;
- hg.quitall = function(){var m="quitall";eval(st);return r;};if(f)quitall=hg.quitall;
 
  hg.up = function(){var m="up";eval(st);return r;};if(f)up=hg.up;
  hg.down = function(){var m="down";eval(st);return r;};if(f)down=hg.down;
@@ -788,6 +782,12 @@
  hg.ddewaitadvicew = function(){var m="ddewaitadvicew"; eval(ns); return 0; };if(f)ddewaitadvicew=hg.ddewaitadvicew;
  hg.keepdde = function(){var m="keepdde"; eval(ns); return 0; };if(f)keepdde=hg.keepdde;
 
+ hg.exit = function(){var m="exit";eval(ns);return 0;};if(f)exit=hg.exit;
+ hg.exitall = function(){var m="exitall";eval(ns);return 0;};if(f)exitall=hg.exitall;
+ hg.saveexit = function(){var m="saveexit";eval(ns);return 0;};if(f)saveexit=hg.saveexit;
+ hg.saveexitall = function(){var m="saveexitall";eval(ns);return 0;};if(f)saveexitall=hg.saveexitall;
+ hg.quit = function(){var m="quit";eval(ns);return 0;};if(f)quit=hg.quit;
+ hg.quitall = function(){var m="quitall";eval(ns);return 0;};if(f)quitall=hg.quitall;
 
  if(f){
  getVar=hidemaru.getVar;
