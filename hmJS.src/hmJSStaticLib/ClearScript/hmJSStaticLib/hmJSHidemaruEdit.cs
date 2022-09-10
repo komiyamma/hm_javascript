@@ -169,51 +169,8 @@ public sealed partial class hmJSDynamicLib
                     return "";
                 }
 
-                String curstr = "";
                 IntPtr hGlobal = pGetTotalTextUnicode();
-                HGlobalStatus hgs = HGlobalStatus.None;
-                if (hGlobal != IntPtr.Zero)
-                {
-                    try
-                    {
-                        IntPtr ret = GlobalLock(hGlobal);
-                        hgs = HGlobalStatus.Lock;
-                        curstr = Marshal.PtrToStringUni(ret);
-                        GlobalUnlock(hGlobal);
-                        hgs = HGlobalStatus.Unlock;
-                        GlobalFree(hGlobal);
-                        hgs = HGlobalStatus.Free;
-                    }
-                    catch (Exception e)
-                    {
-                        OutputDebugStream(e.Message);
-                    }
-                    finally
-                    {
-                        switch (hgs)
-                        {
-                            // ロックだけ成功した
-                            case HGlobalStatus.Lock:
-                                {
-                                    GlobalUnlock(hGlobal);
-                                    GlobalFree(hGlobal);
-                                    break;
-                                }
-                            // アンロックまで成功した
-                            case HGlobalStatus.Unlock:
-                                {
-                                    GlobalFree(hGlobal);
-                                    break;
-                                }
-                            // フリーまで成功した
-                            case HGlobalStatus.Free:
-                                {
-                                    break;
-                                }
-                        }
-                    }
-                }
-                return curstr;
+                return HGlobalToString(hGlobal);
             }
 
             private static void SetTotalText(String value)
@@ -270,48 +227,7 @@ public sealed partial class hmJSDynamicLib
 
                 String curstr = "";
                 IntPtr hGlobal = pGetSelectedTextUnicode();
-                HGlobalStatus hgs = HGlobalStatus.None;
-                if (hGlobal != IntPtr.Zero)
-                {
-                    try
-                    {
-                        IntPtr ret = GlobalLock(hGlobal);
-                        hgs = HGlobalStatus.Lock;
-                        curstr = Marshal.PtrToStringUni(ret);
-                        GlobalUnlock(hGlobal);
-                        hgs = HGlobalStatus.Unlock;
-                        GlobalFree(hGlobal);
-                        hgs = HGlobalStatus.Free;
-                    }
-                    catch (Exception e)
-                    {
-                        OutputDebugStream(e.Message);
-                    }
-                    finally
-                    {
-                        switch (hgs)
-                        {
-                            // ロックだけ成功した
-                            case HGlobalStatus.Lock:
-                                {
-                                    GlobalUnlock(hGlobal);
-                                    GlobalFree(hGlobal);
-                                    break;
-                                }
-                            // アンロックまで成功した
-                            case HGlobalStatus.Unlock:
-                                {
-                                    GlobalFree(hGlobal);
-                                    break;
-                                }
-                            // フリーまで成功した
-                            case HGlobalStatus.Free:
-                                {
-                                    break;
-                                }
-                        }
-                    }
-                }
+                curstr = HGlobalToString(hGlobal);
 
                 if (curstr == null)
                 {
@@ -374,51 +290,8 @@ public sealed partial class hmJSDynamicLib
 
                 HmCursurPos p = GetCursorPos();
 
-                String curstr = "";
                 IntPtr hGlobal = pGetLineTextUnicode(p.lineno);
-                HGlobalStatus hgs = HGlobalStatus.None;
-                if (hGlobal != IntPtr.Zero)
-                {
-                    try
-                    {
-                        IntPtr ret = GlobalLock(hGlobal);
-                        hgs = HGlobalStatus.Lock;
-                        curstr = Marshal.PtrToStringUni(ret);
-                        GlobalUnlock(hGlobal);
-                        hgs = HGlobalStatus.Unlock;
-                        GlobalFree(hGlobal);
-                        hgs = HGlobalStatus.Free;
-                    }
-                    catch (Exception e)
-                    {
-                        OutputDebugStream(e.Message);
-                    }
-                    finally
-                    {
-                        switch (hgs)
-                        {
-                            // ロックだけ成功した
-                            case HGlobalStatus.Lock:
-                                {
-                                    GlobalUnlock(hGlobal);
-                                    GlobalFree(hGlobal);
-                                    break;
-                                }
-                            // アンロックまで成功した
-                            case HGlobalStatus.Unlock:
-                                {
-                                    GlobalFree(hGlobal);
-                                    break;
-                                }
-                            // フリーまで成功した
-                            case HGlobalStatus.Free:
-                                {
-                                    break;
-                                }
-                        }
-                    }
-                }
-                return curstr;
+                return HGlobalToString(hGlobal);
             }
 
             private static void SetLineText(String value)
