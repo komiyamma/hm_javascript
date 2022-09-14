@@ -757,9 +757,9 @@
  hg.seteventnotify = function(){var m="seteventnotify";eval(st);return r;};if(f)seteventnotify=hg.seteventnotify;
  hg.geteventnotify = function(){var m="geteventnotify";eval(fn);return r;};if(f)geteventnotify=hg.geteventnotify;
 
- hg.gettotaltext = function(){ return hidemaru.getTotalText();};if(f)gettotaltext=hg.gettotaltext;
- hg.getlinetext = function(l){ return hidemaru.getLineText(l);};if(f)getlinetext=hg.getlinetext;
- hg.getselectedtext = function(){return hidemaru.getSelectedText();};if(f)getselectedtext=hg.getselectedtext;
+ hg.gettotaltext = function(){ var m="gettotaltext";eval(fs0);return r;};if(f)gettotaltext=hg.gettotaltext;
+ hg.getlinetext = function(){ var m="getlinetext";eval(fs0);return r;};if(f)getlinetext=hg.getlinetext;
+ hg.getselectedtext = function(){ var m="getselectedtext";eval(fs0);return r;};if(f)getselectedtext=hg.getselectedtext;
 
  hg.execmacro = function(){var m="execmacro"; eval(ns); return 0; };if(f)execmacro=hg.execmacro;
  hg.js = function(){var m="js"; eval(ns); return 0; };if(f)js=hg.js;
