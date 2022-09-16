@@ -381,8 +381,29 @@ public sealed partial class hmJSDynamicLib
                         {
                             // まずは整数でトライ
                             Int32 itmp = 0;
-                            success = Int32.TryParse(value.ToString(), out itmp);
+                            try
+                            {
+                                // intでもIntPtrでもないならば...
+                                if (value.GetType() != typeof(int).GetType() && value.GetType() != typeof(IntPtr).GetType())
+                                {
+                                    int itmp_cycle_bit = 0;
+                                    long ltmp = 0;
+                                    bool suc = Int64.TryParse(value.ToString(), out ltmp);
+                                    if (suc)
+                                    {
+                                        success = LongToInt((long)ltmp, out itmp_cycle_bit);
+                                        itmp = itmp_cycle_bit;
+                                    }
+                                }
+                            }
+                            catch (Exception)
+                            {
 
+                            }
+                            if (!success)
+                            {
+                                success = Int32.TryParse(value.ToString(), out itmp);
+                            }
                             if (success == true)
                             {
                                 normalized_arg = itmp;
@@ -958,13 +979,34 @@ public sealed partial class hmJSDynamicLib
                         {
                             // まずは整数でトライ
                             Int32 itmp = 0;
-                            bool success = Int32.TryParse(value.ToString(), out itmp);
+                            bool success = false;
+                            try
+                            {
+                                // intでもIntPtrでもないならば...
+                                if (value.GetType() != typeof(int).GetType() && value.GetType() != typeof(IntPtr).GetType())
+                                {
+                                    int itmp_cycle_bit = 0;
+                                    long ltmp = 0;
+                                    bool suc = Int64.TryParse(value.ToString(), out ltmp);
+                                    if (suc)
+                                    {
+                                        success = LongToInt((long)ltmp, out itmp_cycle_bit);
+                                        itmp = itmp_cycle_bit;
+                                    }
+                                }
+                            }
+                            catch (Exception)
+                            {
 
+                            }
+                            if (!success)
+                            {
+                                success = Int32.TryParse(value.ToString(), out itmp);
+                            }
                             if (success == true)
                             {
                                 result = itmp;
                             }
-
                             else
                             {
                                 // 次に少数でトライ

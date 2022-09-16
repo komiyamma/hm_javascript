@@ -113,18 +113,7 @@ public sealed partial class hmJSDynamicLib
             public static int Clear()
             {
                 //1009=クリア
-                IntPtr r = OutputPane.SendMessage(1009);
-                if ((long)r < (long)int.MinValue)
-                {
-                    r = (IntPtr)int.MinValue;
-                }
-                if ((long)int.MaxValue < (long)r)
-                {
-                    r = (IntPtr)int.MaxValue;
-                }
-
-                return (int)r;
-
+                return OutputPane.SendMessage(1009);
             }
 
             public static IntPtr WindowHandle
@@ -135,15 +124,16 @@ public sealed partial class hmJSDynamicLib
                 }
             }
 
-            public static IntPtr SendMessage(int commandID)
+            public static int SendMessage(int commandID)
             {
                 //
                 // loaddll "HmOutputPane.dll";
                 // #h=dllfunc("GetWindowHandle",hidemaruhandle(0));
                 // #ret=sendmessage(#h,0x111,1009,0);//1009=クリア 0x111=WM_COMMAND
                 //
-                IntPtr result = hmJSDynamicLib.SendMessage(OutputPane.WindowHandle, 0x111, commandID, IntPtr.Zero);
-                return result;
+                IntPtr r = hmJSDynamicLib.SendMessage(OutputPane.WindowHandle, 0x111, commandID, IntPtr.Zero);
+                int ret = (int)HmClamp<long>((long)r, Int32.MinValue, Int32.MaxValue);
+                return ret;
             }
 
             // Output枠へと出力する
