@@ -47,7 +47,11 @@ public sealed partial class hmJSDynamicLib
                     // JSON.stringifyで変換できるはずだ
                     try
                     {
-                        str_message = engine.Script.JSON.stringify(dexp);
+                        str_message = engine.Script.JSON.stringify(dexp, engine.Script._stringify_replacer, 2);
+                        if (str_message != null)
+                        {
+                            str_message = str_message.Replace("\r\n", "\n").Replace("\n", "\r\n");
+                        }
                     }
                     catch (Exception)
                     {

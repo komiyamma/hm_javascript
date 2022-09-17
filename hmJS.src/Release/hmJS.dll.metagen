@@ -570,6 +570,8 @@ Class hmJSDynamicLib+Hidemaru+Edit: AutoLayout, AnsiClass, Class, NestedPublic, 
     set_LineText(String): PrivateScope, Public, Static, HideBySig, SpecialName
 Class hmJSDynamicLib+Hidemaru+Macro: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Object Flags : Public, Static
   Properties:
     Boolean IsExecuting 'get ' : 
   Methods:

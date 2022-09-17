@@ -227,6 +227,7 @@ public sealed partial class hmJSDynamicLib
                 // Standardモードのコンプライアンスまで引き上げる
                 engine = new Microsoft.ClearScript.Windows.JScriptEngine(Microsoft.ClearScript.Windows.WindowsScriptEngineFlags.EnableStandardsMode | Microsoft.ClearScript.Windows.WindowsScriptEngineFlags.EnableDebugging);
                 engine.AddHostObject("clr", new HostTypeCollection("mscorlib", "System", "System.Core"));
+                // engine.AddHostObject("", HostItemFlags.GlobalMembers, new HostTypeCollection("mscorlib", "System", "System.Core"));
                 engine.AddHostObject("host", new ExtendedHostFunctions());
                 engine.AddHostObject("AssemblyPath", new List<String>());
 
@@ -242,7 +243,15 @@ require = hm.require;
 function R(text){
     return text.toString().match(/\/\*([\s\S]*)\*\//)[1].toString();
 }
-                ";
+
+function _stringify_replacer(key, value) {
+    if (typeof value === ""function"") {
+        return ""[fn]:"" + value.toString();
+        }
+    return value;
+}
+
+ ";
                 engine.Execute(expression);
 
                 dpr = new DllPathResolver();

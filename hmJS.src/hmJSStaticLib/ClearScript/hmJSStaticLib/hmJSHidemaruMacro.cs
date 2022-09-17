@@ -1105,8 +1105,12 @@ public sealed partial class hmJSDynamicLib
                         return result;
                     }
                 }
-
             }
+
+            /// <summary>
+            /// 秀丸マクロで用いられる特定の関数でのみ使用可能なフラグ値。主に検索・置換・Grep系、そしてエンコード系。
+            /// </summary>
+            public static Object Flags = new Object();
         }
     }
 }
