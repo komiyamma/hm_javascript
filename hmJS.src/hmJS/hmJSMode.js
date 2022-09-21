@@ -659,8 +659,8 @@
  hg.disabledraw = function(){var m="disabledraw";eval(st);return r;};if(f)disabledraw=hg.disabledraw;
  hg.enabledraw = function(){var m="enabledraw";eval(st);return r;};if(f)enabledraw=hg.enabledraw;
  hg.disabledraw2 = function(){var m="disabledraw2";eval(st);return r;};if(f)disabledraw2=hg.disabledraw2;
- hg.enablebreak = function(){var m="enablebreak";eval(st);return r;};if(f)enablebreak=hg.enablebreak;
  hg.disablebreak = function(){var m="disablebreak";eval(st);return r;};if(f)disablebreak=hg.disablebreak;
+ hg.enablebreak = function(){var m="enablebreak";eval(st);return r;};if(f)enablebreak=hg.enablebreak;
  hg.disableinvert = function(){var m="disableinvert";eval(st);return r;};if(f)disableinvert=hg.disableinvert;
  hg.enableinvert = function(){var m="enableinvert";eval(st);return r;};if(f)enableinvert=hg.enableinvert;
  hg.disableerrormsg = function(){var m="disableerrormsg";eval(st);return r;};if(f)disableerrormsg=hg.disableerrormsg;
