@@ -825,7 +825,6 @@
  hc.dllfuncw = function(){var m="dllfuncw";eval(fn);return r;}
  hc.dllfuncstr = function(){var m="dllfuncstr";eval(fs);return r;}
  hc.dllfuncstrw = function(){var m="dllfuncstrw";eval(fs);return r;}
- hc.loaddllfile = function(){var m="loaddllfile";eval(fs);return r;}
  hc.getloaddllfile = function(){var m="getloaddllfile";eval(fs);return r;}
  hc.setdlldetachfunc = function(){var m="setdlldetachfunc";eval(st);return r;}
  hc.dllfuncexist = function(){var m="dllfuncexist";eval(fn);return r;}
