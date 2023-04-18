@@ -159,6 +159,9 @@ public sealed partial class hmJSDynamicLib
     [DllImport("user32.dll", SetLastError = true)]
     public static extern bool SendMessage(IntPtr hWnd, uint Msg, IntPtr wparam, IntPtr lparam);
     [DllImport("user32.dll", SetLastError = true)]
+    //public static extern long SendMessage(long hWnd, uint Msg, long wparam, long lparam);
+    //[DllImport("user32.dll", SetLastError = true)]
+
     public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int command, IntPtr lparam);
 
     public static Microsoft.ClearScript.Windows.JScriptEngine engine;

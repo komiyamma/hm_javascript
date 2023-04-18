@@ -6,6 +6,9 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using static hmJSDynamicLib.Hidemaru.File;
 
 
 
@@ -21,6 +24,7 @@ public sealed partial class hmJSDynamicLib
             {
                 SetUnManagedDll();
             }
+
 
             // 座標型。Point型では、System.Drawingを読み込まないとダメなので負荷がある。また、x, yは秀丸に別値として存在するので、
             // あくまでも、マクロのcolumnとlinenoと一致しているという主張。なお、x, yはワープロ的な座標を拾ってくる。

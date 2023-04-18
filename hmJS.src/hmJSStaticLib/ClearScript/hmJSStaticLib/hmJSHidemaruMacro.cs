@@ -25,6 +25,11 @@ public sealed partial class hmJSDynamicLib
 
             }
 
+            public static IntPtr _SendMessage(int hWnd, uint msg, int wparam, int lparam)
+            {
+                return hmJSDynamicLib.SendMessage((IntPtr)hWnd, (uint)msg, (int)wparam, (IntPtr)lparam);
+            }
+
             // マクロでの問い合わせ結果系
             public interface IResult
             {

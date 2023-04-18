@@ -234,7 +234,6 @@ Class Microsoft.ClearScript.ScriptEngine: AutoLayout, AnsiClass, Class, Public, 
     Microsoft.ClearScript.ContinuationCallback ContinuationCallback 'get set' : 
     System.Object Script 'get ' : 
   Methods:
-    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
     get_Name(): PrivateScope, Public, HideBySig, SpecialName
     get_Current(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_FileNameExtension(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
@@ -298,6 +297,7 @@ Class Microsoft.ClearScript.ScriptEngine: AutoLayout, AnsiClass, Class, Public, 
     GetStackTrace(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Interrupt(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     CollectGarbage(Boolean): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
 Class Microsoft.ClearScript.HostFunctions: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Interfaces:
@@ -534,6 +534,7 @@ Class hmJSDynamicLib+Hidemaru+ExplorerPane: AutoLayout, AnsiClass, Class, Nested
 Class hmJSDynamicLib+Hidemaru+File: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
+    _SaveTextFile(String, String, String): PrivateScope, Public, Static, HideBySig
     GetEncoding(String): PrivateScope, Public, Static, HideBySig
     Open(String, Int32(Optional, HasDefault)): PrivateScope, Public, Static, HideBySig
 Class hmJSDynamicLib+Hidemaru+ErrorMsg: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
@@ -575,6 +576,7 @@ Class hmJSDynamicLib+Hidemaru+Macro: AutoLayout, AnsiClass, Class, NestedPublic,
   Properties:
     Boolean IsExecuting 'get ' : 
   Methods:
+    _SendMessage(Int32, UInt32, Int32, Int32): PrivateScope, Public, Static, HideBySig
     Eval(Object): PrivateScope, Public, Static, HideBySig
     SetStaticVariable(String, String, Int32): PrivateScope, Public, Static, HideBySig
     GetStaticVariable(String, Int32): PrivateScope, Public, Static, HideBySig
