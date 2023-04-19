@@ -8,6 +8,7 @@
  hidemaru.getSelectedText = function() { var selected = hm.Edit.SelectedText; if (selected == "") { return undefined; } else { return selected; } };
  hidemaru.loadTextFile = function (p) { try { var sr = hm.File.Open(p); var text = sr.Read(); sr.Close(); return text; } catch(e) { } return undefined; };
  hidemaru.saveTextFile = function (p, t, e) { return hm.File._SaveTextFile(p, t, e); };
+
  hidemaru.getVar = function (s) { return hm.Macro.Var(s); };
  hidemaru.setVar = function (s, v) { return hm.Macro.Var(s, v); };
  hidemaru.evalMacro = function (s) { return hm.Macro.Eval(s); };
