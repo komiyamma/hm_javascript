@@ -105,10 +105,10 @@ Struct Microsoft.ClearScript.HostItemFlags: AutoLayout, AnsiClass, Class, Public
     Microsoft.ClearScript.HostItemFlags PrivateAccess = 2 : Public, Static, Literal, HasDefault
     Microsoft.ClearScript.HostItemFlags HideDynamicMembers = 4 : Public, Static, Literal, HasDefault
     Microsoft.ClearScript.HostItemFlags DirectAccess = 8 : Public, Static, Literal, HasDefault
-Interface Microsoft.ClearScript.IScriptableObject: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.IScriptableObject: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Methods:
     OnExposedToScriptCode(ScriptEngine): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
-Interface Microsoft.ClearScript.IScriptEngineException: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.IScriptEngineException: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     System.String Message 'get ' : 
     Int32 HResult 'get ' : 
@@ -366,7 +366,7 @@ Class Microsoft.ClearScript.EventConnection`1[T]: AutoLayout, AnsiClass, Class, 
   Type parameter: T
   Methods:
     disconnect(): PrivateScope, Public, HideBySig
-Interface Microsoft.ClearScript.IPropertyBag: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.IPropertyBag: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Interfaces:
     System.Collections.Generic.IDictionary`2[System.String,System.Object]
     System.Collections.Generic.ICollection`1[System.Collections.Generic.KeyValuePair`2[System.String,System.Object]]
@@ -407,7 +407,7 @@ Class Microsoft.ClearScript.Undefined: AutoLayout, AnsiClass, Class, Public, Bef
   Methods:
     ToString(): PrivateScope, Public, Virtual, HideBySig
 Class Microsoft.ClearScript.VoidResult: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-Interface Microsoft.ClearScript.Windows.IHostWindow: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.Windows.IHostWindow: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     IntPtr OwnerHandle 'get ' : 
   Methods:
@@ -453,7 +453,7 @@ Class Microsoft.ClearScript.Windows.WindowsScriptEngine: AutoLayout, AnsiClass, 
     GetStackTrace(): PrivateScope, Public, Virtual, HideBySig
     Interrupt(): PrivateScope, Public, Virtual, HideBySig
     CollectGarbage(Boolean): PrivateScope, Public, Virtual, HideBySig
-Interface Microsoft.ClearScript.JavaScript.IArrayBuffer: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.JavaScript.IArrayBuffer: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     UInt64 Size 'get ' : 
   Methods:
@@ -461,7 +461,7 @@ Interface Microsoft.ClearScript.JavaScript.IArrayBuffer: AutoLayout, AnsiClass, 
     GetBytes(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     ReadBytes(UInt64, UInt64, Byte[], UInt64): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     WriteBytes(Byte[], UInt64, UInt64, UInt64): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
-Interface Microsoft.ClearScript.JavaScript.IArrayBufferView: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.JavaScript.IArrayBufferView: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     Microsoft.ClearScript.JavaScript.IArrayBuffer ArrayBuffer 'get ' : 
     UInt64 Offset 'get ' : 
@@ -473,17 +473,17 @@ Interface Microsoft.ClearScript.JavaScript.IArrayBufferView: AutoLayout, AnsiCla
     GetBytes(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     ReadBytes(UInt64, UInt64, Byte[], UInt64): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     WriteBytes(Byte[], UInt64, UInt64, UInt64): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
-Interface Microsoft.ClearScript.JavaScript.IDataView: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.JavaScript.IDataView: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Interfaces:
     Microsoft.ClearScript.JavaScript.IArrayBufferView
-Interface Microsoft.ClearScript.JavaScript.ITypedArray: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.JavaScript.ITypedArray: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Interfaces:
     Microsoft.ClearScript.JavaScript.IArrayBufferView
   Properties:
     UInt64 Length 'get ' : 
   Methods:
     get_Length(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
-Interface Microsoft.ClearScript.JavaScript.ITypedArray`1[T]: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Interface Microsoft.ClearScript.JavaScript.ITypedArray`1[T]: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
   Type parameter: T
   Interfaces:
     Microsoft.ClearScript.JavaScript.ITypedArray
@@ -534,6 +534,7 @@ Class hmJSDynamicLib+Hidemaru+ExplorerPane: AutoLayout, AnsiClass, Class, Nested
 Class hmJSDynamicLib+Hidemaru+File: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
+    _LoadTextFile(String, String): PrivateScope, Public, Static, HideBySig
     _SaveTextFile(String, String, String): PrivateScope, Public, Static, HideBySig
     GetEncoding(String): PrivateScope, Public, Static, HideBySig
     Open(String, Int32(Optional, HasDefault)): PrivateScope, Public, Static, HideBySig
@@ -597,21 +598,21 @@ Class hmJSDynamicLib+Hidemaru+OutputPane: AutoLayout, AnsiClass, Class, NestedPu
     get_WindowHandle(): PrivateScope, Public, Static, HideBySig, SpecialName
     SendMessage(Int32): PrivateScope, Public, Static, HideBySig
     SetBaseDir(String): PrivateScope, Public, Static, HideBySig
-Interface hmJSDynamicLib+Hidemaru+File+IHidemaruEncoding: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+Interface hmJSDynamicLib+Hidemaru+File+IHidemaruEncoding: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     Int32 HmEncode 'get ' : 
   Methods:
     get_HmEncode(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
-Interface hmJSDynamicLib+Hidemaru+File+IMicrosoftEncoding: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+Interface hmJSDynamicLib+Hidemaru+File+IMicrosoftEncoding: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     Int32 MsCodePage 'get ' : 
   Methods:
     get_MsCodePage(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
-Interface hmJSDynamicLib+Hidemaru+File+IEncoding: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+Interface hmJSDynamicLib+Hidemaru+File+IEncoding: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract, BeforeFieldInit
   Interfaces:
     hmJSDynamicLib+Hidemaru+File+IHidemaruEncoding
     hmJSDynamicLib+Hidemaru+File+IMicrosoftEncoding
-Interface hmJSDynamicLib+Hidemaru+File+IHidemaruStreamReader: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+Interface hmJSDynamicLib+Hidemaru+File+IHidemaruStreamReader: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract, BeforeFieldInit
   Interfaces:
     System.IDisposable
   Properties:
@@ -669,7 +670,7 @@ Struct hmJSDynamicLib+Hidemaru+Edit+HmMousePos: AutoLayout, AnsiClass, Class, Ne
     get_y(): PrivateScope, Public, HideBySig, SpecialName
     get_column(): PrivateScope, Public, HideBySig, SpecialName
     get_lineno(): PrivateScope, Public, HideBySig, SpecialName
-Interface hmJSDynamicLib+Hidemaru+Macro+IResult: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+Interface hmJSDynamicLib+Hidemaru+Macro+IResult: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     Int32 Result 'get ' : 
     System.String Message 'get ' : 
@@ -678,7 +679,7 @@ Interface hmJSDynamicLib+Hidemaru+Macro+IResult: AutoLayout, AnsiClass, Class, N
     get_Result(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     get_Message(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     get_Error(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
-Interface hmJSDynamicLib+Hidemaru+Macro+IStatementResult: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+Interface hmJSDynamicLib+Hidemaru+Macro+IStatementResult: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     Int32 Result 'get ' : 
     System.String Message 'get ' : 
@@ -689,7 +690,7 @@ Interface hmJSDynamicLib+Hidemaru+Macro+IStatementResult: AutoLayout, AnsiClass,
     get_Message(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     get_Error(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     get_Args(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
-Interface hmJSDynamicLib+Hidemaru+Macro+IFunctionResult: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+Interface hmJSDynamicLib+Hidemaru+Macro+IFunctionResult: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract, BeforeFieldInit
   Properties:
     System.Object Result 'get ' : 
     System.String Message 'get ' : 

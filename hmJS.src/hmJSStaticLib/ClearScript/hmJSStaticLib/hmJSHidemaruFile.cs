@@ -24,6 +24,7 @@ public sealed partial class hmJSDynamicLib
                 SetUnManagedDll();
             }
 
+
             public static int _SaveTextFile(string filepath, string text, string encoding_name)
             {
                 try
