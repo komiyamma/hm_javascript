@@ -557,12 +557,14 @@ Class hmJSDynamicLib+Hidemaru+Edit: AutoLayout, AnsiClass, Class, NestedPublic, 
   Properties:
     HmCursurPos CursorPos 'get ' : 
     HmMousePos MousePos 'get ' : 
+    System.String FileName 'get ' : 
     System.String TotalText 'get set' : 
     System.String SelectedText 'get set' : 
     System.String LineText 'get set' : 
   Methods:
     get_CursorPos(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_MousePos(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FileName(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_TotalText(): PrivateScope, Public, Static, HideBySig, SpecialName
     set_TotalText(String): PrivateScope, Public, Static, HideBySig, SpecialName
     get_SelectedText(): PrivateScope, Public, Static, HideBySig, SpecialName

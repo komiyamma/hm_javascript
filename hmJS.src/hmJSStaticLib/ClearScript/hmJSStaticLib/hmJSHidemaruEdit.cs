@@ -145,6 +145,33 @@ public sealed partial class hmJSDynamicLib
                 return p;
             }
 
+            public static String FileName
+            {
+                get
+                {
+                    IntPtr hWndHidemaru = WindowHandle;
+                    if (hWndHidemaru != IntPtr.Zero)
+                    {
+                        const int WM_USER = 0x400;
+                        const int WM_HIDEMARUINFO = WM_USER + 181;
+                        const int HIDEMARUINFO_GETFILEFULLPATH = 4;
+
+                        StringBuilder sb = new StringBuilder(512);
+                        bool cwch = SendMessage(hWndHidemaru, WM_HIDEMARUINFO, new IntPtr(HIDEMARUINFO_GETFILEFULLPATH), sb);
+                        String filename = sb.ToString();
+                        if (String.IsNullOrEmpty(filename))
+                        {
+                            return "";
+                        }
+                        else
+                        {
+                            return filename;
+                        }
+                    }
+                    return "";
+                }
+            }
+
             /// <summary>
             /// TotalText
             /// </summary>
