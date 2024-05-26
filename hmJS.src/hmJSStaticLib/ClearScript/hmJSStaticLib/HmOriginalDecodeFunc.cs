@@ -85,7 +85,7 @@ public sealed partial class hmJSDynamicLib
                 }
                 catch (Exception e)
                 {
-                    OutputDebugStream(e);
+                    OutputDebugStream(e.ToString());
                 }
 
                 return "";
