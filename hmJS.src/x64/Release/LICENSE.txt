@@ -1,5 +1,5 @@
 ﻿- hmJS
-   Copyright (c) 2016-2024 Akitsugu Komiyama
+   Copyright (c) 2016-2025 Akitsugu Komiyama
 
 
                                  Apache License
