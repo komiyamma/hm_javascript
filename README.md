@@ -1,12 +1,12 @@
 # hmJS
 
-![hmJS v2.0.2](https://img.shields.io/badge/hmJS-v2.0.2-6479ff.svg)
+![hmJS v2.0.2](https://img.shields.io/badge/hmJS-v2.0.2-6479ff.svg) ← ここはバッジにしたほうがよさそう
 [![Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-blue.svg?style=flat)](LICENSE.txt)
 ![Hidemaru 8.73+](https://img.shields.io/badge/Hidemaru-v8.73+-6479ff.svg)
 ![JScript 5.8](https://img.shields.io/badge/JScript-v5.8-6479ff.svg?logo=javascript&logoColor=white)
 ![.NET Framework 4.0+](https://img.shields.io/badge/.NET-4.0+-blueviolet.svg?logo=.net)
 
-[公式ウェブサイト](https://秀丸マクロ.net/?page=nobu_tool_hm_javascript)
+(https://秀丸マクロ.net/?page=nobu_tool_hm_javascript
 
 ## 概要
 
